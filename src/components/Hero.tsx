@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { MagneticButton } from './primitives';
 
 const phrases = ['Website visibility', 'Local search presence', 'AI discovery', 'Customer conversations'];
@@ -35,11 +36,16 @@ const snippets = [
   { code: 'New Leads\n127 ↑', top: '70%', right: '3%', delay: 0.8 },
 ];
 
+const socialProofCategories = ['Hotels', 'Restaurants', 'Healthcare', 'Dental', 'Real Estate', 'Home Services', 'Retail', 'Professional'];
+
 export function Hero() {
   const typed = useTypewriter();
 
   return (
     <section id="home" className="relative min-h-screen overflow-hidden pt-32 pb-20">
+      {/* Animated hero visual background */}
+      <HeroVisual />
+
       {/* Floating code snippets */}
       {snippets.map((s, i) => (
         <motion.div
@@ -61,7 +67,11 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="mx-auto mb-8 inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs text-white/70"
         >
-          <span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" /></span>AI-powered visibility for modern businesses
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-75" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
+          </span>
+          AI-powered visibility for modern businesses
         </motion.div>
 
         <motion.h1
@@ -70,7 +80,8 @@ export function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="font-display text-4xl font-semibold leading-[1.05] tracking-tight text-white text-balance sm:text-6xl md:text-7xl lg:text-[5.2rem]"
         >
-          Make Your Business Easier to Find.{' '}<span className="gradient-text-animated">Easier to Trust. Easier to Choose.</span>
+          Make Your Business Easier to Find.{' '}
+          <span className="gradient-text-animated">Easier to Trust. Easier to Choose.</span>
         </motion.h1>
 
         <motion.div
@@ -105,17 +116,41 @@ export function Hero() {
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </MagneticButton>
-          <MagneticButton href="#platform" variant="ghost" className="w-full sm:w-auto">
+          <Link
+            to="/services"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-2xl glass px-7 py-3.5 text-sm font-semibold text-white/90 transition hover:text-white sm:w-auto"
+          >
             Explore the Platform
-          </MagneticButton>
+          </Link>
+        </motion.div>
+
+        {/* Honest social proof */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mx-auto mt-20"
+        >
+          <p className="text-sm font-medium text-white/50">Built for businesses ready to be found, trusted, and chosen.</p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            {socialProofCategories.map((cat, i) => (
+              <span
+                key={cat}
+                className="rounded-full glass px-4 py-2 text-xs font-medium text-white/55"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                {cat}
+              </span>
+            ))}
+          </div>
         </motion.div>
 
         {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mx-auto mt-20 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4"
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-4 sm:grid-cols-4"
         >
           {[
             { v: '92%', l: 'Visibility score' },
@@ -132,13 +167,83 @@ export function Hero() {
       </div>
 
       {/* Scroll indicator */}
-      <div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce"
-      >
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
         <div className="flex h-9 w-5 items-start justify-center rounded-full border border-white/20 p-1">
           <span className="h-1.5 w-1 rounded-full bg-white/60" />
         </div>
       </div>
     </section>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Animated gradient mesh simulating a video backdrop */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        animate={{
+          background: [
+            'radial-gradient(circle at 20% 30%, rgba(59,130,246,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(6,182,212,0.25) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.2) 0%, transparent 60%)',
+            'radial-gradient(circle at 70% 20%, rgba(59,130,246,0.3) 0%, transparent 50%), radial-gradient(circle at 30% 80%, rgba(6,182,212,0.25) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.2) 0%, transparent 60%)',
+            'radial-gradient(circle at 20% 30%, rgba(59,130,246,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(6,182,212,0.25) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(139,92,246,0.2) 0%, transparent 60%)',
+          ],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      {/* Animated data lines */}
+      <svg className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+        <motion.path
+          d="M0,200 Q400,100 800,300 T1920,200"
+          stroke="rgba(59,130,246,0.15)"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1, pathOffset: [0, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.path
+          d="M0,400 Q600,300 1200,500 T1920,400"
+          stroke="rgba(6,182,212,0.12)"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1, pathOffset: [0, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.path
+          d="M0,600 Q300,500 900,700 T1920,600"
+          stroke="rgba(139,92,246,0.1)"
+          strokeWidth="2"
+          fill="none"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1, pathOffset: [0, 1] }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+        />
+      </svg>
+
+      {/* Floating particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute h-1 w-1 rounded-full bg-cyan/40"
+          style={{
+            left: `${(i * 37) % 100}%`,
+            top: `${(i * 53) % 100}%`,
+          }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.2, 0.6, 0.2],
+          }}
+          transition={{
+            duration: 4 + (i % 3),
+            repeat: Infinity,
+            delay: i * 0.2,
+            ease: 'easeInOut',
+          }}
+        />
+      ))}
+    </div>
   );
 }
