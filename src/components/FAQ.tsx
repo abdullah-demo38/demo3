@@ -1,0 +1,17 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Plus } from 'lucide-react';
+import { Reveal, SectionHeading } from './primitives';
+const faqs = [
+  ['What does the platform help with?', 'AIO Matrix brings website optimization, local SEO, AI search visibility, business profile insights, content, reputation support, and lead capture into one connected workspace.'],
+  ['How does AI search visibility work?', 'The platform helps you understand how your business may appear across modern discovery experiences, identify important queries, and find practical opportunities to strengthen your presence.'],
+  ['Can you optimize my existing website?', 'Yes. You can connect an existing website and use the visibility and health views to identify technical, content, structure, and conversion opportunities.'],
+  ['Can it help with local SEO?', 'Yes. It brings together location-focused content, business information, local signals, and performance insights to help you make better-informed improvements.'],
+  ['Can it help with Google Business Profile optimization?', 'It can help you organize and improve the information, services, reviews, posts, hours, and local performance signals connected to your business profile.'],
+  ['Can it help manage customer reviews?', 'Reputation tools help teams identify feedback opportunities and create consistent, professional response workflows.'],
+  ['How does the AI Assistant work?', 'The website assistant answers common product questions, explains features and plans, and guides visitors toward a consultation using lightweight conversational logic.'],
+  ['Can I connect my existing website?', 'Yes. Existing websites and business information can be the starting point for understanding your current digital presence.'],
+  ['How do I get started?', 'Request a free visibility audit. We will review your goals and recommend the clearest next step for your business.'],
+  ['Do you guarantee Google rankings?', 'No legitimate SEO platform can guarantee a specific Google ranking. Our tools are designed to identify opportunities, improve your digital presence, and help you make informed optimization decisions.'],
+];
+export function FAQ() { const [open, setOpen] = useState<number | null>(0); return <section id="faq" className="relative z-10 py-28 sm:py-36"><div className="mx-auto max-w-3xl px-6"><SectionHeading eyebrow="FAQ" title={<>Questions, <span className="gradient-text">answered.</span></>} /><div className="mt-12 space-y-3">{faqs.map(([question, answer], index) => <Reveal key={question} delay={index * .025}><div className="overflow-hidden rounded-2xl glass"><button onClick={() => setOpen(open === index ? null : index)} aria-expanded={open === index} className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"><span className="font-display text-base font-medium text-white sm:text-lg">{question}</span><motion.span animate={{ rotate: open === index ? 45 : 0 }} className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-white/5 text-cyan"><Plus size={18} /></motion.span></button><AnimatePresence initial={false}>{open === index && <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}><p className="px-6 pb-5 text-sm leading-relaxed text-white/55">{answer}</p></motion.div>}</AnimatePresence></div></Reveal>)}</div></div></section>; }
