@@ -1,4 +1,4 @@
-import { Activity, Globe as Globe2, MapPin, Search, Star, Users } from 'lucide-react';
+import { Activity, Globe2, MapPin, Search, Star, Users } from 'lucide-react';
 import { Reveal, SectionHeading } from './primitives';
 
 const metrics = [
@@ -20,7 +20,7 @@ export function Dashboard() {
         <SectionHeading
           eyebrow="One connected platform"
           title={<>See your digital presence <span className="gradient-text">from one place.</span></>}
-          subtitle="A clear view of the signals that help customers find, trust, and choose your business."
+          subtitle="A clear view of the signals that help customers find, trust, and choose your business. Demonstration interface and values only."
         />
         <Reveal>
           <div className="mt-14 overflow-hidden rounded-3xl border border-white/10 bg-[#0a0f17]/90 shadow-2xl">
